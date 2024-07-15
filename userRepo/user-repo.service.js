@@ -25,6 +25,9 @@ class UserRepoService {
     }
   }
 
+  /**
+   * @returns {Promise<User[]>}
+   */
   async getUsersFromDatabase() {
     const users = await this.userModel.findAll({
       limit: 100,

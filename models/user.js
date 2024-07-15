@@ -8,6 +8,8 @@ const sequelize = require('./db')
  * @property {string} firstName
  * @property {string} lastName
  * @property {number} age
+ * @property {string} createdAt
+ * @property {string} updatedAt
  */
 
 /**
@@ -27,6 +29,20 @@ class User extends Model {
     /** @type {UserAttributes['firstName']} */ this.firstName
     /** @type {UserAttributes['lastName']} */ this.lastName
     /** @type {UserAttributes['age']} */ this.age
+    /** @type {UserAttributes['createdAt']} */ this.createdAt
+    /** @type {UserAttributes['updatedAt']} */ this.updatedAt
+  }
+
+  /**
+   * Returns plain user without sequelizes' metadata
+   * @returns {User}
+   */
+  display() {
+    return {
+      ...this.get({ plain: true }),
+      createdAt: this.createdAt?.toISOString(),
+      updatedAt: this.updatedAt?.toISOString(),
+    }
   }
 }
 
@@ -46,6 +62,14 @@ User.init({
   },
   age: {
     type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  createdAt: {
+    type: DataTypes.TEXT,
+    allowNull: false,
+  },
+  updatedAt: {
+    type: DataTypes.TEXT,
     allowNull: false,
   },
 }, {

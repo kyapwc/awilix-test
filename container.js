@@ -6,7 +6,9 @@ const UserRepoService = require('./userRepo/user-repo.service.js')
 
 const { User: UserModel } = require('./models')
 
-const container = awilix.createContainer()
+const container = awilix.createContainer({
+  injectionMode: awilix.InjectionMode.PROXY,
+})
 
 container.register({
   userQueryController: awilix.asClass(UserQueryController).singleton(),
