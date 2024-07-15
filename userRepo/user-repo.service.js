@@ -1,7 +1,14 @@
 const { User } = require('../models')
 
 class UserRepoService {
-  constructor() {}
+  /**
+   * @param {{
+   * userModel: import('../models/user.js');
+   * }}
+   */
+  constructor({ userModel }) {
+    this.userModel = userModel
+  }
 
   /**
    * Get a user from existing sqlite database
@@ -10,7 +17,7 @@ class UserRepoService {
    */
   async getUserFromDatabase(id) {
     try {
-      const user = await User.findOne({ where: { id } })
+      const user = await this.userModel.findOne({ where: { id } })
       return user
     } catch (error) {
       console.log('Error: ', error)
@@ -19,7 +26,7 @@ class UserRepoService {
   }
 
   async getUsersFromDatabase() {
-    const users = await User.findAll({
+    const users = await this.userModel.findAll({
       limit: 100,
       offset: 0,
     })
@@ -52,7 +59,7 @@ class UserRepoService {
    */
   async createUserInDatabase({ firstName, lastName, age }) {
     try {
-      const user = await User.create({
+      const user = await this.userModel.create({
         firstName,
         lastName,
         age: age || 18,
