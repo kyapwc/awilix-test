@@ -1,4 +1,9 @@
 class UserCommandController {
+  /**
+   * @param {{
+   * userRepoService: import('../userRepo/user-repo.service.js');
+   * }}
+   */
   constructor({ userRepoService }) {
     this.userRepoService = userRepoService
   }

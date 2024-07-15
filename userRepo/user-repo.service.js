@@ -10,7 +10,7 @@ class UserRepoService {
   /**
    * Just a random method to get a user
    * @param {number} id
-   * @returns {User}
+   * @returns {Promise<User>}
    */
   async getUser(id) {
     const user = { id, name: 'Yap Wei Chun' }
@@ -25,7 +25,7 @@ class UserRepoService {
   /**
    * Just a random method to create a fake user
    * @param {string} name
-   * @returns {User}
+   * @returns {Promise<User>}
    */
   async createUser(name) {
     return new Promise((resolve) => {
